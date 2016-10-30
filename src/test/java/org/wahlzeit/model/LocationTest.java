@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.model.Coordinate;
+import org.wahlzeit.model.Location;
 
 public class LocationTest {
 
