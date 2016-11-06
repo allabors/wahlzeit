@@ -60,7 +60,7 @@ public class WahlzeitTestSuit {
 	 */
 	@BeforeClass
 	public static void prepare() {
-llpö´ä-		ServiceMainExchanger.prepare();
+		ServiceMainExchanger.prepare();
 	}
 	
 	/**
