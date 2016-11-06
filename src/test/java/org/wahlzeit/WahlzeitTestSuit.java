@@ -56,7 +56,7 @@ public class WahlzeitTestSuit {
 	
 	
 	/**
-	 * 
+	 * prepares all test for execution
 	 */
 	@BeforeClass
 	public static void prepare() {
@@ -64,7 +64,7 @@ public class WahlzeitTestSuit {
 	}
 	
 	/**
-	 * 
+	 * cleans up all the prepared states
 	 */
 	@AfterClass
 	public static void cleanup() {
