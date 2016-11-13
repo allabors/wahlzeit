@@ -25,7 +25,7 @@ import org.wahlzeit.utils.UtilsSuite;
 		UtilsSuite.class
 	
 })
-public class WahlzeitTestSuit {
+public class WahlzeitTestSuite {
 
 	private static class ServiceMainExchanger extends ServiceMain {
 		private static ServiceMain original = ServiceMain.getInstance();
