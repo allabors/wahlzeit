@@ -7,15 +7,17 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(value=Suite.class)
 @SuiteClasses(value={
 		AccessRightsTest.class, 
-		CoordinateTest.class,
+		CartesianCoordinateTest.class,
 		FlagReasonTest.class,
 		GenderTest.class,
 		GuestTest.class,
-		LocationTest.class,
 		PhotoFilterTest.class,
 		TagsTest.class,
 		UserStatusTest.class,
-		ValueTest.class
+		ValueTest.class,
+		SphericCoordinate.class,
+		CartesianCoordinate.class,
+		CoordinateConvertService.class
 })
 
 
