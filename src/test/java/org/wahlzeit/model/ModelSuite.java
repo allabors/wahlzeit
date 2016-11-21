@@ -15,9 +15,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		TagsTest.class,
 		UserStatusTest.class,
 		ValueTest.class,
-		SphericCoordinate.class,
-		CartesianCoordinate.class,
-		CoordinateConvertService.class
+		SphericCoordinateTest.class,
+		CoordinateConvertServiceTest.class
 })
 
 
