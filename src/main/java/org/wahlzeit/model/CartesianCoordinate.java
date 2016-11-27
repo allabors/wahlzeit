@@ -7,7 +7,7 @@ package org.wahlzeit.model;
  * This class serves as a base for cartesian coordinate computations.
  *
  */
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 
 	private double x;
 	private double y;
@@ -44,5 +44,6 @@ public class CartesianCoordinate implements Coordinate {
 		double distance = Math.sqrt(Math.pow(cartesian.x-this.x, 2) + Math.pow(cartesian.y - this.y, 2) + Math.pow(cartesian.z - this.z, 2));
 		return distance;
 	}
+	
 
 }

@@ -31,8 +31,8 @@ public class CoordinateConvertServiceTest {
 	@Test
 	public void testConvertToSpheric() {
 		SphericCoordinate sphresult = instance.convertToSpheric(loc1cart);
-		assertEquals(sphresult.getLatitude(), 64.28, 1);
-		assertEquals(sphresult.getLongitude(), 100.22, 1);
+		assertEquals(sphresult.getLatitude(), 64.28, 0.001);
+		assertEquals(sphresult.getLongitude(), 100.22, 0.001);
 		
 		sphresult = instance.convertToSpheric(loc2cart);
 		assertEquals(sphresult.getLatitude(), 40.71, 1);

@@ -7,7 +7,7 @@ package org.wahlzeit.model;
  * This class serves as a base for spherical coordinate computations.
  *
  */
-public class SphericCoordinate implements Coordinate {
+public class SphericCoordinate extends AbstractCoordinate {
 	
 	public static final double EARTH_RADIUS = 6371;
 	private final double latitude;
@@ -61,9 +61,9 @@ public class SphericCoordinate implements Coordinate {
 		
 		double deltaPhi = Math.abs(Math.toRadians(this.latitude) - Math.toRadians(spheric.latitude));
 		double deltaLa = Math.abs(Math.toRadians(this.longitude) - Math.toRadians(spheric.longitude));
-		double deltaSigma = 2 * Math.asin( Math.sqrt( Math.pow(deltaPhi/2, 2) + Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(spheric.latitude)) * Math.pow(Math.sin(deltaLa/2), 2)));
+		double deltaSigma = 2 * Math.asin( Math.sqrt( Math.pow(Math.sin(deltaPhi/2), 2) + Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(spheric.latitude)) * Math.pow(Math.sin(deltaLa/2), 2)));
 		return EARTH_RADIUS * deltaSigma;			
-				
+		
 	}
 
 }
