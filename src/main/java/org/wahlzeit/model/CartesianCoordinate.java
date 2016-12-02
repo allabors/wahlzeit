@@ -37,11 +37,8 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	@Override
 	public double getDistance(Coordinate other) {
 		
-		CoordinateConvertService converter = CoordinateConvertService.getInstance();
-		
-		CartesianCoordinate cartesian = converter.convertToCartesian(other);
-		
-		double distance = Math.sqrt(Math.pow(cartesian.x-this.x, 2) + Math.pow(cartesian.y - this.y, 2) + Math.pow(cartesian.z - this.z, 2));
+		DistanceComputation instance = DistanceComputation.getInstance();
+		double distance = instance.getDistance(this, other);
 		return distance;
 	}
 	

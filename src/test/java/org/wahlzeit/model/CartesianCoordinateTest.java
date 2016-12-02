@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CartesianCoordinateTest {
+	
+	private final static double EPSILON = 0.01;
 	private SphericCoordinate loc1sp;
 	private SphericCoordinate loc2sp;
 	private CartesianCoordinate loc1cart;
@@ -14,8 +16,8 @@ public class CartesianCoordinateTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		loc1sp = new SphericCoordinate(64.28, 100.22);
-		loc2sp = new SphericCoordinate(40.71, -74.01);
+		loc1sp = new SphericCoordinate(64.28, 100.22, SphericCoordinate.EARTH_RADIUS);
+		loc2sp = new SphericCoordinate(40.71, -74.01, SphericCoordinate.EARTH_RADIUS);
 		
 		loc1cart = new CartesianCoordinate(-490.56, 2720.98, 5739.80);
 		loc2cart = new CartesianCoordinate(1330.34, -4642.5, 4155.36);
@@ -27,14 +29,14 @@ public class CartesianCoordinateTest {
 	
 	@Test
 	public void testGetDistance() {
-		assertEquals(loc1cart.getDistance(loc2cart), 7748.997, 0.01);
-		assertEquals(loc1cart.getDistance(loc2sp), 7748.997, 0.01);
+		assertEquals(loc1cart.getDistance(loc2cart), 7748.997, EPSILON);
+		assertEquals(loc1cart.getDistance(loc2sp), 7748.997, EPSILON);
 		
-		assertEquals(loc2cart.getDistance(loc1cart), 7748.997, 0.01);
-		assertEquals(loc2cart.getDistance(loc1sp), 7748.997, 0.01);
+		assertEquals(loc2cart.getDistance(loc1cart), 7748.997, EPSILON);
+		assertEquals(loc2cart.getDistance(loc1sp), 7748.997, EPSILON);
 		
-		assertEquals(loc1cart.getDistance(loc1cart), 0, 0.01);
-		assertEquals(loc1cart.getDistance(loc1sp), 0, 0.01);
+		assertEquals(loc1cart.getDistance(loc1cart), 0, EPSILON);
+		assertEquals(loc1cart.getDistance(loc1sp), 0, EPSILON);
 		
 	} 
 	/**

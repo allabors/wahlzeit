@@ -27,10 +27,10 @@ public class CoordinateConvertService {
 		
 		if(other instanceof CartesianCoordinate) {
 			CartesianCoordinate cartesianCoordinate = (CartesianCoordinate) other;
-			double r = Math.sqrt(Math.pow (cartesianCoordinate.getX(), 2) + Math.pow(cartesianCoordinate.getY(), 2) + Math.pow(cartesianCoordinate.getZ(), 2));
-			double latitude = Math.asin(cartesianCoordinate.getZ()/r);
+			double radius = Math.sqrt(Math.pow (cartesianCoordinate.getX(), 2) + Math.pow(cartesianCoordinate.getY(), 2) + Math.pow(cartesianCoordinate.getZ(), 2));
+			double latitude = Math.asin(cartesianCoordinate.getZ()/radius);
 			double longitude = Math.atan2(cartesianCoordinate.getY(),cartesianCoordinate.getX());
-			return new SphericCoordinate(Math.toDegrees(latitude), Math.toDegrees(longitude));
+			return new SphericCoordinate(Math.toDegrees(latitude), Math.toDegrees(longitude), radius);
 		}
 		return (SphericCoordinate) other;
 		
@@ -44,9 +44,9 @@ public class CoordinateConvertService {
 		
 		if (other instanceof SphericCoordinate) {
 			SphericCoordinate sphericCoordinate = (SphericCoordinate) other;
-			double x = SphericCoordinate.EARTH_RADIUS*Math.sin(Math.toRadians(90-sphericCoordinate.getLatitude()))*Math.cos(Math.toRadians(sphericCoordinate.getLongitude()));
-			double y = SphericCoordinate.EARTH_RADIUS*Math.sin(Math.toRadians(90-sphericCoordinate.getLatitude()))*Math.sin(Math.toRadians(sphericCoordinate.getLongitude()));
-			double z = SphericCoordinate.EARTH_RADIUS*Math.cos(Math.toRadians(90-sphericCoordinate.getLatitude()));
+			double x = sphericCoordinate.getRadius()*Math.sin(Math.toRadians(90-sphericCoordinate.getLatitude()))*Math.cos(Math.toRadians(sphericCoordinate.getLongitude()));
+			double y = sphericCoordinate.getRadius()*Math.sin(Math.toRadians(90-sphericCoordinate.getLatitude()))*Math.sin(Math.toRadians(sphericCoordinate.getLongitude()));
+			double z = sphericCoordinate.getRadius()*Math.cos(Math.toRadians(90-sphericCoordinate.getLatitude()));
 			return new CartesianCoordinate(x, y, z);
 		}
 		return (CartesianCoordinate) other;
