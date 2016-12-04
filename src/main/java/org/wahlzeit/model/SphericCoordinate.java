@@ -14,6 +14,41 @@ public class SphericCoordinate extends AbstractCoordinate {
 	private final double latitude;
 	private final double longitude;
 	
+	
+	private class SphericInvariant extends AbstractCoordinate.Invariant {
+		
+		// Save the SphericCoordinate's state
+		private final double radius = SphericCoordinate.this.radius;
+		private final double latitude = SphericCoordinate.this.latitude;
+		private final double longitude = SphericCoordinate.this.longitude;
+		
+				
+		private boolean isValidLatitude() {
+			return Math.abs(latitude) <= 90;
+		}
+		
+		private boolean isValidLongitude() {
+			return Math.abs(longitude) <= 180;
+		}
+		
+		private boolean isValidRadius() {
+			return radius > 0;
+		}
+
+		@Override
+		protected void check() {
+
+			assert radius == SphericCoordinate.this.radius
+					&& latitude == SphericCoordinate.this.latitude
+					&& longitude == SphericCoordinate.this.longitude;
+			
+			assert isValidLatitude() && isValidLongitude() && isValidRadius() :
+				String.format(
+						"The Coordinate state is invalid. Latitude is %s, Longitude is %s, Radius is %s ", 
+						latitude, longitude, radius);
+		}
+	}
+	
 	/**
 	 * Create Coordinate object with given latitude and longitude
 	 * @param latitude
@@ -21,16 +56,12 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 */
 	public SphericCoordinate(double latitude, double longitude, double radius) {
 		
-		if (latitude < -90 || latitude > 90) {
-			throw new IllegalArgumentException("Latitude should be between -90 and 90");
-		}
-		if (longitude < -180 || longitude > 180) {
-			throw new IllegalArgumentException("Longtitude should be between -180 and 180");
-		}
-		
+				
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.radius = radius;
+		//Class invariant
+		new SphericInvariant().check();
 	}
 	
 	/**
@@ -42,6 +73,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	/**
+	 * Returns the longitude of a coordinate.
 	 * @return the longitude
 	 */
 	public double getLongitude(){
@@ -55,29 +87,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return radius;
 	}
 
-	/**
-	 * Calculate distance between two spherical coordinate
-	 * 
-	 * @param other
-	 * @return distance in km.
-	 */
 	@Override
-	public double getDistance(Coordinate other) {
-		
-		DistanceComputation computation = DistanceComputation.getInstance();
-					
-	/*	getDistance for spherical coordinate version 1.0
-		double deltaPhi = Math.abs(Math.toRadians(this.latitude) - Math.toRadians(spheric.latitude));
-		double deltaLa = Math.abs(Math.toRadians(this.longitude) - Math.toRadians(spheric.longitude));
-		double deltaSigma = 2 * Math.asin( Math.sqrt( Math.pow(Math.sin(deltaPhi/2), 2) + Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(spheric.latitude)) * Math.pow(Math.sin(deltaLa/2), 2)));
-		return EARTH_RADIUS * deltaSigma;			
-	*/
-		double distance = computation.getDistance(this, other);
-		return distance;
-		
+	protected Invariant getInvariant() {
+		return new SphericInvariant();
 	}
-	
-	
-	
-
 }

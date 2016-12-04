@@ -9,14 +9,33 @@ package org.wahlzeit.model;
  */
 public class CartesianCoordinate extends AbstractCoordinate {
 
-	private double x;
-	private double y;
-	private double z;
+	private final double x;
+	private final double y;
+	private final double z;
 	
+private class CartesianInvariant extends AbstractCoordinate.Invariant {
+		
+		// Save the SphericCoordinate's state
+		private final double x = CartesianCoordinate.this.x;
+		private final double y = CartesianCoordinate.this.y;
+		private final double z = CartesianCoordinate.this.z;
+		
+		@Override
+		protected void check() {
+
+			assert x == CartesianCoordinate.this.x
+					&& y == CartesianCoordinate.this.y
+					&& z == CartesianCoordinate.this.z
+				: "The Coordinate state is invalid.";
+		}
+	}
 	public CartesianCoordinate(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		
+		//Class invariant
+		new CartesianInvariant().check();
 	}
 	
 	public double getX() {
@@ -30,17 +49,10 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	public double getZ() {
 		return this.z;
 	}
-	
-	/**
-	 * calculate shortest distance between two point
-	 */
+
 	@Override
-	public double getDistance(Coordinate other) {
-		
-		DistanceComputation instance = DistanceComputation.getInstance();
-		double distance = instance.getDistance(this, other);
-		return distance;
+	protected Invariant getInvariant() {
+		return new CartesianInvariant();
 	}
 	
-
 }
