@@ -28,7 +28,7 @@ public class CartesianCoordinateTest {
 	}
 	
 	@Test
-	public void testGetDistance() {
+	public void testGetDistance() throws CoordinateException {
 		assertEquals(loc1cart.getDistance(loc2cart), 7748.997, EPSILON);
 		assertEquals(loc1cart.getDistance(loc2sp), 7748.997, EPSILON);
 		
@@ -41,9 +41,10 @@ public class CartesianCoordinateTest {
 	} 
 	/**
 	 * Test isEqual for same type and two different types of coordinates
+	 * @throws CoordinateException 
 	 */
 	@Test
-	public void testIsEqual() {
+	public void testIsEqual() throws CoordinateException {
 		assertEquals(loc2cart.isEqual(loc2sp), true);
 		assertEquals(loc2cart.isEqual(loc2cart), true);
 		assertEquals(loc2cart.isEqual(loc1cart), false);

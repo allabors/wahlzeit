@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class CoordinateConvertServiceTest {
 	
-	static CoordinateConvertService instance;
+	static CoordinateCreationService instance;
 
 	private final static
 	double EPSILON = 0.01;
@@ -19,7 +19,7 @@ public class CoordinateConvertServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		instance = CoordinateConvertService.getInstance();
+		instance = CoordinateCreationService.getInstance();
 		loc1cart = new CartesianCoordinate(-490.56, 2720.98, 5739.80);
 		loc2cart = new CartesianCoordinate(1330.34, -4642.5, 4155.36);
 		loc1sp = new SphericCoordinate(64.28, 100.22, SphericCoordinate.EARTH_RADIUS);

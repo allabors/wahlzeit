@@ -45,7 +45,7 @@ public class SphericCoordinateTest {
 	}
 	
 	@Test
-	public void testGetDistance() {
+	public void testGetDistance() throws CoordinateException {
 		assertEquals(loc1sp.getDistance(loc2sp), 7748.997, EPSILON);
 		assertEquals(loc1sp.getDistance(loc2cart), 7748.997, EPSILON);
 		// An idea for isEqual method, the distance between same coordinates
@@ -54,9 +54,10 @@ public class SphericCoordinateTest {
 
 	/**
 	 * Test isEqual for same type and two different types of coordinates
+	 * @throws CoordinateException 
 	 */
 	@Test
-	public void testIsEqual() {
+	public void testIsEqual() throws CoordinateException {
 		assertEquals(loc2sp.isEqual(loc2sp), true);
 		assertEquals(loc2sp.isEqual(loc2cart), true);
 		

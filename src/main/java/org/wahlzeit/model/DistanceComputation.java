@@ -13,14 +13,14 @@ public class DistanceComputation {
 	}
 	/**
 	 * Calculate the shortest distance between two coordinates,
-	 * first use {@link CoordinateConvertService} to convert coordinates to {@link CartesianCoordinate}
+	 * first use {@link CoordinateCreationService} to convert coordinates to {@link CartesianCoordinate}
 	 * and than calculate shortest distance
 	 * @param first coordinate
 	 * @param second coordinate
 	 * @return distance in km
 	 */
 	public double getDistance(Coordinate first, Coordinate second) {
-		CoordinateConvertService convertService = CoordinateConvertService.getInstance();
+		CoordinateCreationService convertService = CoordinateCreationService.getInstance();
 		CartesianCoordinate cartesianFirst = convertService.convertToCartesian(first);
 		CartesianCoordinate cartesianSecond = convertService.convertToCartesian(second);
 		

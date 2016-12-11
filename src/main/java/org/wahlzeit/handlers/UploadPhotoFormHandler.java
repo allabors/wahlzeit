@@ -20,9 +20,14 @@
 
 package org.wahlzeit.handlers;
 
-import com.google.appengine.api.images.Image;
+import java.util.Map;
+import java.util.logging.Logger;
+
 import org.wahlzeit.agents.AsyncTaskExecutor;
 import org.wahlzeit.model.AccessRights;
+import org.wahlzeit.model.CoordinateCreationService;
+import org.wahlzeit.model.CoordinateCreationService.CoordinateType;
+import org.wahlzeit.model.Location;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoManager;
@@ -33,8 +38,7 @@ import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 
-import java.util.Map;
-import java.util.logging.Logger;
+import com.google.appengine.api.images.Image;
 
 /**
  * A handler class for a specific web form.
@@ -79,6 +83,12 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			Image uploadedImage = user.getUploadedImage();
 			Photo photo = pm.createPhoto(fileName, uploadedImage);
 
+			CoordinateType coordinateType = 
+					CoordinateCreationService.CoordinateType.fromString(
+							us.getAsString(args, "coordinateType"));
+			String[] locationData = us.getAsString(args, "locationData").split(",");
+			photo.setLocation(new Location(
+					CoordinateCreationService.getInstance().create(coordinateType, locationData)));
 			user.addPhoto(photo);
 
 			photo.setTags(new Tags(tags));

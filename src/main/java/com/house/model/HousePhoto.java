@@ -14,10 +14,7 @@ import com.googlecode.objectify.annotation.Subclass;
  */
 @Subclass
 public class HousePhoto extends Photo {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 7070186052793618556L;
 
 	HousePhoto() {

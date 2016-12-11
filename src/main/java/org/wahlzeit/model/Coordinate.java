@@ -12,8 +12,9 @@ public interface Coordinate {
 	 * @param other
 	 * @throws IllegalArgumentException
 	 * @return distance in km.
+	 * @throws CoordinateException when some exception during coordination handling occurred.
 	 */
-	double getDistance(Coordinate other);
+	double getDistance(Coordinate other) throws CoordinateException;
 	
 	
 	/**
@@ -21,7 +22,8 @@ public interface Coordinate {
 	 * 
 	 * @param other some other coordinate instance.
 	 * @return TRUE / FALSE.
+	 * @throws CoordinateException  when some exception during coordination handling occurred.
 	 */
-	boolean isEqual(Coordinate other);
+	boolean isEqual(Coordinate other) throws CoordinateException;
 
 }

@@ -20,6 +20,13 @@
 
 package org.wahlzeit.model;
 
+import java.util.Map;
+
+import org.wahlzeit.services.DataObject;
+import org.wahlzeit.services.EmailAddress;
+import org.wahlzeit.services.Language;
+import org.wahlzeit.services.ObjectManager;
+
 import com.google.api.client.util.ArrayMap;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.images.Image;
@@ -27,12 +34,6 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Parent;
-import org.wahlzeit.services.DataObject;
-import org.wahlzeit.services.EmailAddress;
-import org.wahlzeit.services.Language;
-import org.wahlzeit.services.ObjectManager;
-
-import java.util.Map;
 
 /**
  * A photo represents a user-provided (uploaded) photo.
@@ -63,7 +64,11 @@ public class Photo extends DataObject {
 	 *
 	 */
 	public static final int MAX_PHOTO_WIDTH = 420;
+
+
 	public static final int MAX_PHOTO_HEIGHT = 600;
+	
+	
 	public static final int MAX_THUMB_PHOTO_WIDTH = 105;
 	public static final int MAX_THUMB_PHOTO_HEIGHT = 150;
 
@@ -99,6 +104,8 @@ public class Photo extends DataObject {
 	 *
 	 */
 	protected Tags tags = Tags.EMPTY_TAGS;
+	
+	protected Location location;
 	
 	/**
 	 *
@@ -386,6 +393,19 @@ public class Photo extends DataObject {
 	public void setTags(Tags newTags) {
 		tags = newTags;
 		incWriteCount();
+	}
+	/**
+	 * @methodtype get
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	/**
+	 * @methodtype set
+	 * @param location
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 	/**
