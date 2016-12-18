@@ -3,32 +3,54 @@
  */
 package org.wahlzeit.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Singleton CoordinateCreationService
  *
  */
 public class CoordinateCreationService {
 	
+		
 	/**
 	 * Enumerates supported coordinate types.
 	 */
 	public static enum CoordinateType {
-		SPHERICAL, CARTESIAN;
+		SPHERICAL {
+			@Override
+			Coordinate create(double arg1, double arg2, double arg3) {
+				return new SphericCoordinate(arg1, arg2, arg3);
+			}
+		}, 
+		CARTESIAN {
+			@Override
+			Coordinate create(double arg1, double arg2, double arg3) {
+				return new CartesianCoordinate(arg1, arg2, arg3);
+			}
+		};
 		
 		/**
 		 * Gives an instance of {@link CoordinateType} according to the string represented name.
 		 * @param name
-		 * @return
+		 * @return coordinate type
 		 * @throws CoordinateException
 		 */
 		public static CoordinateType fromString(String name) throws CoordinateException {
 			CoordinateType coordinateType = valueOf(name.toUpperCase());
 			if (coordinateType == null) {
+				
 				throw new CoordinateException(new NullPointerException());
 			}
 			return coordinateType;
 		}
+		
+		Coordinate create(double arg1, double arg2, double arg3) {
+			throw new UnsupportedOperationException("Unsupported coordinate type.");
+		}
 	}
+	
+	Map<CoordinateType, Map<double[],Coordinate>> coordinateTypeMap = new HashMap<>();
 	
 	private static CoordinateCreationService instance;
 		
@@ -42,32 +64,29 @@ public class CoordinateCreationService {
 	
 	/**
 	 * Creates a new coordinate from the given string represented values.
+	 * 
+	 * 
+	 * 
 	 * @param type the Type.
 	 * @param values the Values. 
 	 * @return the new instance.
-	 * @throws CoordinateException 
+	 * 
 	 */
-	public Coordinate create(CoordinateType type, String... values) throws CoordinateException {
-		try {
-			switch (type) {
-			case CARTESIAN:
-				return new CartesianCoordinate(
-						Double.parseDouble(values[0].trim()),
-						Double.parseDouble(values[1].trim()),
-						Double.parseDouble(values[2].trim()));
-			case SPHERICAL:
-				return new SphericCoordinate(
-						Double.parseDouble(values[0].trim()),
-						Double.parseDouble(values[1].trim()),
-						SphericCoordinate.EARTH_RADIUS);
-			default:
-				throw new IllegalArgumentException(String.format("The coordinate-type '%s' is unknown.", values[0]));
-			}
-		} catch (Exception ex) {
-			throw new CoordinateException(ex);
+	public Coordinate create(CoordinateType type, double arg1, double arg2, double arg3) {
+		Map<double[], Coordinate> coordinateMap = coordinateTypeMap.get(type);
+		if (coordinateMap == null) {
+			coordinateMap = new HashMap<>();
+			coordinateTypeMap.put(type, coordinateMap);
 		}
-	}
-	
+		
+		double[] key = {arg1, arg2, arg3};
+		Coordinate coordinate = coordinateMap.get(key);
+		if (coordinate == null) {
+			coordinate = type.create(arg1, arg2, arg3);
+			coordinateMap.put(key, coordinate);
+		}
+		return coordinate;
+	}	
 	
 	/**
 	 * convert cartesian to spherical
@@ -82,8 +101,6 @@ public class CoordinateCreationService {
 			return new SphericCoordinate(Math.toDegrees(latitude), Math.toDegrees(longitude), radius);
 		}
 		return (SphericCoordinate) other;
-		
-		
 	}
 	
 	/**

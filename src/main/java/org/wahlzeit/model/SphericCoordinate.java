@@ -7,7 +7,7 @@ package org.wahlzeit.model;
  * This class serves as a base for spherical coordinate computations.
  *
  */
-public class SphericCoordinate extends AbstractCoordinate {
+public final class SphericCoordinate extends AbstractCoordinate {
 	
 	public static final double EARTH_RADIUS = 6371;
 	private final double radius;
@@ -54,7 +54,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param latitude
 	 * @param longtitude
 	 */
-	public SphericCoordinate(double latitude, double longitude, double radius) {
+	SphericCoordinate(double latitude, double longitude, double radius) {
 		
 				
 		this.latitude = latitude;

@@ -28,7 +28,9 @@ public class DistanceComputation {
 				Math.pow(cartesianSecond.getY() - cartesianFirst.getY(), 2) + 
 				Math.pow(cartesianSecond.getZ() - cartesianFirst.getZ(), 2));
 	}
-	
-	
 
+	public int toHash(Coordinate coordinate) {
+		return CoordinateCreationService.getInstance()
+				.convertToCartesian(coordinate).toHash();
+	}
 }

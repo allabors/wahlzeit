@@ -87,8 +87,11 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 					CoordinateCreationService.CoordinateType.fromString(
 							us.getAsString(args, "coordinateType"));
 			String[] locationData = us.getAsString(args, "locationData").split(",");
+			double arg1 = Double.parseDouble(locationData[0]);
+			double arg2 = Double.parseDouble(locationData[1]);
+			double arg3 = Double.parseDouble(locationData[2]);
 			photo.setLocation(new Location(
-					CoordinateCreationService.getInstance().create(coordinateType, locationData)));
+					CoordinateCreationService.getInstance().create(coordinateType, arg1, arg2, arg3)));
 			user.addPhoto(photo);
 
 			photo.setTags(new Tags(tags));

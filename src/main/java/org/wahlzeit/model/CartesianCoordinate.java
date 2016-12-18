@@ -3,6 +3,8 @@
  */
 package org.wahlzeit.model;
 
+import java.util.Objects;
+
 /**
  * This class serves as a base for cartesian coordinate computations.
  *
@@ -29,7 +31,7 @@ private class CartesianInvariant extends AbstractCoordinate.Invariant {
 				: "The Coordinate state is invalid.";
 		}
 	}
-	public CartesianCoordinate(double x, double y, double z) {
+	CartesianCoordinate(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -54,5 +56,8 @@ private class CartesianInvariant extends AbstractCoordinate.Invariant {
 	protected Invariant getInvariant() {
 		return new CartesianInvariant();
 	}
-	
+
+	public int toHash() {
+		return Objects.hash(x, y, z);
+	}
 }

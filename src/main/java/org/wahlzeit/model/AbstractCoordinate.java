@@ -22,10 +22,10 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 	
 	@Override
-	public final double getDistance(Coordinate other) throws CoordinateException {
+	public final double getDistance(Coordinate other) {
 		//precondition in public method
 		if (other == null)
-			throw new CoordinateException("Second coordinate can not be null!");
+			throw new CoordinateRuntimeException("Second coordinate can not be null!");
 		
 		Invariant invariant = getInvariant();
 		
@@ -50,13 +50,22 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 * The distance between two same coordinates is always zero. Based on this assumption
 	 * checks this implementation the equality.
 	 * A possible deviation can not be greater than 0.01.
-	 * @throws CoordinateException 
 	 * 
 	 * @see org.wahlzeit.model.Coordinate#isEqual(org.wahlzeit.model.Coordinate)
 	 */
 	@Override
-	public final boolean isEqual(Coordinate other) throws CoordinateException {
-		
+	public final boolean isEqual(Coordinate other) {
 		return this.getDistance(other) <= 0.01 ;
+	}
+	
+	@Override
+	public final boolean equals(Object obj) {
+		return obj instanceof AbstractCoordinate
+			&& isEqual((Coordinate) obj);
+	}
+	
+	@Override
+	public final int hashCode() {
+		return DistanceComputation.getInstance().toHash(this);
 	}
 }

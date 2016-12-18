@@ -4,6 +4,10 @@ public class Location {
 	
 	private final Coordinate coordinate;
 	
+	private Location() {
+		coordinate = null;
+	}
+		
 	/**
 	 * Create object Location with given coordinates
 	 * @param coordinate
