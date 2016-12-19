@@ -9,7 +9,7 @@ import java.util.Objects;
  * This class serves as a base for cartesian coordinate computations.
  *
  */
-public class CartesianCoordinate extends AbstractCoordinate {
+public final class CartesianCoordinate extends AbstractCoordinate {
 
 	private final double x;
 	private final double y;
