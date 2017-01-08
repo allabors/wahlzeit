@@ -1,5 +1,11 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+		patternName = "Singleton"
+		)
+
 public class DistanceComputation {
 	
 	private static DistanceComputation instance;

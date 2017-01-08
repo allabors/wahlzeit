@@ -6,8 +6,15 @@ package org.wahlzeit.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+		patternName = "Flyweight",
+		participants = {"FlyweightFactory"}
+		)
+		
 /**
- * Singleton CoordinateCreationService
+ * CoordinateCreationService
  *
  */
 public class CoordinateCreationService {

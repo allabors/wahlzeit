@@ -5,8 +5,14 @@ package com.house.model;
 
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.utils.PatternInstance;
 
 import com.googlecode.objectify.annotation.Subclass;
+
+@PatternInstance(
+		patternName = "AbstractFactory",
+		participants = {"ConcreteProduct"}
+		)
 
 
 /**

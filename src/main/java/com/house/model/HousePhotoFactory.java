@@ -6,6 +6,12 @@ package com.house.model;
 import org.wahlzeit.model.PhotoFactory;
 import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.services.OfyService;
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+		patternName = "Abstract Factory",
+		participants = {"ConcreteFactory"}
+		)
 
 /**
  * An Abstract Factory for creating photos.
