@@ -13,7 +13,7 @@ import com.house.model.HousePhotoFactory;
 /**
  * Listener to startup and shutdown the FamilyHome application.
  */
-public class House extends Wahlzeit {
+public class HouseWahlzeit extends Wahlzeit {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {

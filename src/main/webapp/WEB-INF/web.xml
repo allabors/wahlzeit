@@ -9,7 +9,7 @@
 <!-- 		<listener-class>org.wahlzeit.apps.Wahlzeit</listener-class> -->
 <!-- 	</listener> -->
 	<listener>
-		<listener-class>com.house.apps.House</listener-class>
+		<listener-class>com.house.apps.HouseWahlzeit</listener-class>
 	</listener>
 	<!--> Main listener Application end </!-->
 
