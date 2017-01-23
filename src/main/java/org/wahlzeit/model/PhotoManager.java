@@ -20,14 +20,6 @@
 
 package org.wahlzeit.model;
 
-import com.google.appengine.api.images.Image;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Work;
-import org.wahlzeit.model.persistence.ImageStorage;
-import org.wahlzeit.services.LogBuilder;
-import org.wahlzeit.services.ObjectManager;
-import org.wahlzeit.services.Persistent;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,8 +32,40 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.wahlzeit.model.persistence.ImageStorage;
+import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.services.ObjectManager;
+import org.wahlzeit.services.Persistent;
+
+import com.google.appengine.api.images.Image;
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Work;
+import com.house.model.domain.HouseType;
+
 /**
  * A photo manager provides access to and manages photos.
+ * 
+ * Manages the objects life cycle of type {@link Photo} and persisting them via ofy-framework.
+ * 
+ * <p>Here are the main steps of this process:
+ * <ol>
+ *  <li> {@link #createPhoto(String, Image) - create a transient instance of {@link Photo} </li>
+ *  <li> {@link PhotoManager#savePhoto(Photo) or {@link #savePhotos()} persist one {@link Photo} or all as a whole.</li>
+ * </ol>
+ * 
+ * The Design-Space of the object creation process can be summarized as follows:
+ * 
+ * <ul>
+ * 	<li> Delegation : Abstract Factory, since to {@link HouseType} delegated </li>
+ *  <li> Selection : Prototype. The involvement of ofy-framework can be viewed here as "prototyped" 
+ *  type selection.</li>
+ *  <li> Configuration : Product Trader, since the persistence annotation "entity" provides some kind of configuration.
+ *  </li>
+ *  <li> Instantiation : Prototype. The argumentation is the same as for the selection.</li>
+ *  <li> Initialization : Prototype. The argumentation is the same as for the selection.</li>
+ *  <li> Building : Builder, since many other subjects like {@link PhotoId}, {@link PhotoUtil} etc. give the initial
+ *  complex structure of a photo.</li>
+ * </ul>
  */
 public class PhotoManager extends ObjectManager {
 
