@@ -1,5 +1,11 @@
 package org.wahlzeit.model;
 
+import com.house.model.collaborations.Collaborations;
+
+@Collaborations(
+		bindings = {
+			"photo-location:type"
+	})
 public class Location {
 	
 	private final Coordinate coordinate;

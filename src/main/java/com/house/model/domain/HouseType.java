@@ -7,13 +7,18 @@ import java.util.Set;
 import org.wahlzeit.services.DataObject;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.house.model.collaborations.Collaborations;
 
 /**
  * 
  * TypeClass for types of Houses
  *
  */
-
+@Collaborations(
+		bindings = {
+			"house-type:type"
+	})
 @Entity
 public class HouseType extends DataObject{
 	
@@ -22,6 +27,9 @@ public class HouseType extends DataObject{
 	
 	private final HouseType supertype;
 	private final Set<HouseType> subtypes = new HashSet<>();
+	
+	@Id
+	Long idLong;
 	
 	/**
 	 * Constructs a new {@link HouseType} with the given name and

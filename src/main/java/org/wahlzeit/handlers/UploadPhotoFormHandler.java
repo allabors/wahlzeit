@@ -30,7 +30,6 @@ import org.wahlzeit.model.CoordinateCreationService.CoordinateType;
 import org.wahlzeit.model.Location;
 import org.wahlzeit.model.ModelConfig;
 import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoManager;
 import org.wahlzeit.model.Tags;
 import org.wahlzeit.model.User;
 import org.wahlzeit.model.UserSession;
@@ -39,6 +38,8 @@ import org.wahlzeit.utils.StringUtil;
 import org.wahlzeit.webparts.WebPart;
 
 import com.google.appengine.api.images.Image;
+import com.house.model.HousePhoto;
+import com.house.model.domain.HousePhotoManager;
 
 /**
  * A handler class for a specific web form.
@@ -77,11 +78,11 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 		}
 
 		try {
-			PhotoManager pm = PhotoManager.getInstance();
+			HousePhotoManager pm = HousePhotoManager.getInstance();
 			String fileName = us.getAsString(args, "fileName");
 			User user = (User) us.getClient();
 			Image uploadedImage = user.getUploadedImage();
-			Photo photo = pm.createPhoto(fileName, uploadedImage);
+			HousePhoto photo = pm.createHousePhoto(fileName, uploadedImage);
 
 			CoordinateType coordinateType = 
 					CoordinateCreationService.CoordinateType.fromString(

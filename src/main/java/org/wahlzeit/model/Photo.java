@@ -105,8 +105,6 @@ public class Photo extends DataObject {
 	 */
 	protected Tags tags = Tags.EMPTY_TAGS;
 	
-	protected Location location;
-	
 	/**
 	 *
 	 */
@@ -394,20 +392,7 @@ public class Photo extends DataObject {
 		tags = newTags;
 		incWriteCount();
 	}
-	/**
-	 * @methodtype get
-	 */
-	public Location getLocation() {
-		return location;
-	}
-	/**
-	 * @methodtype set
-	 * @param location
-	 */
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
+	
 	/**
 	 * @methodtype get
 	 */
